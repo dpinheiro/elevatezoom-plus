@@ -721,8 +721,8 @@ if (typeof Object.create !== 'function') {
                 width: self.nzWidth,  // new code
                 height: self.nzHeight // new code
             });
-            self.mouseLeft = parseInt(e.pageX - self.nzOffset.left);
-            self.mouseTop = parseInt(e.pageY - self.nzOffset.top);
+            self.mouseLeft = parseInt(e.pageX - self.originalNzOffset.left);
+            self.mouseTop = parseInt(e.pageY - self.originalNzOffset.top);
             //calculate the Location of the Lens
 
             //calculate the bound regions - but only if zoom window
@@ -789,8 +789,8 @@ if (typeof Object.create !== 'function') {
                 //if lens zoom
                 if (self.options.zoomType === 'lens') {
 
-                    self.windowLeftPos = ((e.pageX - self.nzOffset.left) * self.widthRatio - self.zoomLens.width() / 2) * -1;
-                    self.windowTopPos = ((e.pageY - self.nzOffset.top) * self.heightRatio - self.zoomLens.height() / 2) * -1;
+                    self.windowLeftPos = ((e.pageX - self.originalNzOffset.left) * self.widthRatio - self.zoomLens.width() / 2) * -1;
+                    self.windowTopPos = ((e.pageY - self.originalNzOffset.top) * self.heightRatio - self.zoomLens.height() / 2) * -1;
                     self.zoomLens.css({
                         backgroundPosition: '' + self.windowLeftPos + 'px ' + self.windowTopPos + 'px'
                     });
@@ -1093,8 +1093,8 @@ if (typeof Object.create !== 'function') {
 
             }
 
-            self.windowLeftPos = ((e.pageX - self.nzOffset.left) * self.widthRatio - self.zoomWindow.width() / 2) * -1;
-            self.windowTopPos = ((e.pageY - self.nzOffset.top) * self.heightRatio - self.zoomWindow.height() / 2) * -1;
+            self.windowLeftPos = ((e.pageX - self.originalNzOffset.left) * self.widthRatio - self.zoomWindow.width() / 2) * -1;
+            self.windowTopPos = ((e.pageY - self.originalNzOffset.top) * self.heightRatio - self.zoomWindow.height() / 2) * -1;
             if (self.Etoppos) {
                 self.windowTopPos = 0;
             }
@@ -1887,12 +1887,14 @@ if (typeof Object.create !== 'function') {
         updateOffset: function (self) {
             if (self.options.zoomContainerAppendTo !== 'body') {
                 self.nzOffset = self.$elem.offset();
+                self.originalNzOffset = self.$elem.offset();
                 var appendedPosition = $(self.options.zoomContainerAppendTo).offset();
                 self.nzOffset.top = self.$elem.offset().top - appendedPosition.top;
                 self.nzOffset.left = self.$elem.offset().left - appendedPosition.left;
 
             } else {
                 self.nzOffset = self.$elem.offset();
+                self.originalNzOffset = self.$elem.offset();
             }
         },
 
