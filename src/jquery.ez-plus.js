@@ -1125,7 +1125,8 @@ if (typeof Object.create !== 'function') {
                         self.windowLeftPos = 0;
                     }
                     if (self.heightRatio <= 1) {
-                        self.windowTopPos = 0;
+                        // center image vertically
+                        self.windowTopPos = '50%';
                     }
                 }
                 // adjust images less than the window height
@@ -1327,7 +1328,7 @@ if (typeof Object.create !== 'function') {
                     self.zoomWindow.css({
                         backgroundPosition: '' +
                         self.windowLeftPos + 'px ' +
-                        self.windowTopPos + 'px'
+                        self.windowTopPos
                     });
                 }
             }
