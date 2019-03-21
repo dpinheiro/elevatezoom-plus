@@ -1116,6 +1116,8 @@ if (typeof Object.create !== 'function') {
                 self.windowLeftPos = 0;
             }
 
+            self.yUnits = 'px';
+
             //set the css background position
             if (self.options.zoomType === 'window' || self.options.zoomType === 'inner') {
 
@@ -1126,7 +1128,8 @@ if (typeof Object.create !== 'function') {
                     }
                     if (self.heightRatio <= 1) {
                         // center image vertically
-                        self.windowTopPos = '50%';
+                        self.windowTopPos = 50;
+                        self.yUnits = '%'
                     }
                 }
                 // adjust images less than the window height
@@ -1328,7 +1331,7 @@ if (typeof Object.create !== 'function') {
                     self.zoomWindow.css({
                         backgroundPosition: '' +
                         self.windowLeftPos + 'px ' +
-                        self.windowTopPos
+                        self.windowTopPos + self.yUnits
                     });
                 }
             }
